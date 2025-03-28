@@ -1,0 +1,84 @@
+
+    {% extends "layout.html" %}
+
+    {% block content %}
+    <h1 class="text-3xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <i class="lucide lucide-layout-dashboard text-green-700"></i>
+        Dashboard
+    </h1>
+    
+    <div class="flex flex-col md:flex-row gap-4">
+        <!-- Left Side: Income, Expenses, Balance -->
+        <div class="w-full md:w-1/2 space-y-3">
+            <div class="bg-white p-3 rounded-lg shadow-md flex items-center gap-2 transition-transform hover:scale-105">
+                <i class="lucide lucide-trending-up text-green-600 text-3xl"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Income</h3>
+                    <p id="totalIncome" class="text-2xl text-green-600 font-bold">${{ total_income }}</p>
+                </div>
+            </div>
+            <div class="bg-white p-3 rounded-lg shadow-md flex items-center gap-2 transition-transform hover:scale-105">
+                <i class="lucide lucide-trending-down text-red-600 text-3xl"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Total Expenses</h3>
+                    <p id="totalExpense" class="text-2xl text-red-600 font-bold">${{ total_expense }}</p>
+                </div>
+            </div>
+            <div class="bg-white p-3 rounded-lg shadow-md flex items-center gap-2 transition-transform hover:scale-105">
+                <i class="lucide lucide-wallet text-blue-600 text-3xl"></i>
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700">Remaining Balance</h3>
+                    <p id="remainingBalance" class="text-2xl text-blue-600 font-bold">${{ remaining }}</p>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Right Side: Currency Selector -->
+        <div class="flex-1 space-y-4">
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-semibold text-gray-700 flex items-center gap-2">
+                    <i class="lucide lucide-coins text-yellow-500"></i>
+                    Change Currency
+                </h3>
+                <div class="space-y-3 mt-3">
+                    <div class="flex flex-col">
+                        <label for="baseCurrency" class="text-md font-semibold text-gray-700 mb-1">Base Currency</label>
+                        <select id="baseCurrency" class="w-full p-2 border rounded-lg text-md shadow-sm">
+                            <option value="USD">USD - United States Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                        </select>
+                    </div>
+    
+                    <div class="flex flex-col">
+                        <label for="targetCurrency" class="text-md font-semibold text-gray-700 mb-1">Target Currency</label>
+                        <select id="targetCurrency" class="w-full p-2 border rounded-lg text-md shadow-sm">
+                            <option value="USD">USD - United States Dollar</option>
+                            <option value="EUR">EUR - Euro</option>
+                            <option value="GBP">GBP - British Pound</option>
+                        </select>
+                    </div>
+    
+                    <div class="flex flex-col">
+                        <label for="amount" class="text-md font-semibold text-gray-700 mb-1">Amount</label>
+                        <input type="number" id="amount" class="w-full p-2 border rounded-lg text-md shadow-sm" placeholder="Enter amount" min="0">
+                    </div>
+    
+                    <button id="convertButton" class="w-full p-3 bg-green-900 text-white rounded-lg shadow-md hover:bg-green-700">
+                        Convert
+                    </button>
+    
+                    <div id="conversionResult" class="mt-3 text-lg font-semibold text-center text-gray-800"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Example event listener for currency conversion
+        document.getElementById('convertButton').addEventListener('click', function() {
+            alert('Conversion logic will be implemented here.');
+        });
+    </script>
+    {% endblock %}
+ 

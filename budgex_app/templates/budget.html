@@ -1,0 +1,41 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+      <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <a href="{%url 'addbudget'%}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-end m-2">
+                + Add Budget
+                </a>
+            <h1 class="text-3xl font-semibold mb-6">Budgets</h1>
+                        
+            <div class="bg-white p-5 rounded-lg shadow">
+                <h3 class="text-xl font-semibold mb-4">Monthly Budget Overview</h3>
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="py-2 px-4">Category</th>
+                            <th class="py-2 px-4">Budgeted Name</th>
+                            <th class="py-2 px-4">Amount</th>
+                            <th class="py-2 px-4">Start date</th>
+                            <th class="py-2 px-4">Period</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for budget in budgets %}
+                            <tr class="border-t">
+                                <td class="py-2 px-4">{{ budget.category.name }}</td>  <!-- Category name -->
+                                <td class="py-2 px-4">{{ budget.name }}</td>  <!-- Budget name -->
+                                <td class="py-2 px-4">${{ budget.amount }}</td>  <!-- Budget amount -->
+                                <td class="py-2 px-4">{{ budget.start_date }}</td>  <!-- Budget startdate -->
+                                <td class="py-2 px-4">{{ budget.recurrence }}</td>  <!-- Budget period -->
+
+                            </tr>
+                        {% endfor %}
+                    </tbody>  
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

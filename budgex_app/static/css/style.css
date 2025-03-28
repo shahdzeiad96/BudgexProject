@@ -1,0 +1,56 @@
+
+.logo{
+    width: 160px;
+    height: 102px;
+}
+.navbar{
+
+    height: 90px;
+}
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #535051;
+
+    background: linear-gradient(to right, rgba(75, 84, 75, 0.5), rgba(143, 211, 244, 0.5))
+    }
+    .gradient-custom-4 {
+    background: #84fab0;
+
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+    }
+.hellouser{
+    display: flex;
+    float: right;
+    color: #74a067;
+    padding: 10px;
+    font-family: cursive;
+}
+.pie-chart{
+    margin: auto;
+    width: 400px;
+}
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.diagram{
+    height: 500px;
+    width: 600px;
+    margin: auto;
+}
+
+.tablebody{ 
+    background-color:white;
+    height: 470px;
+    margin-top: 15px;
+    border-radius: 15px;
+}
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #a13737; padding: 10px; text-align: left; }
+th { background-color: #f4f4f4; }
+.summary { margin-top: 20px; font-size: 18px; font-weight: bold; }
+    

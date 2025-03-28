@@ -1,0 +1,140 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="flex h-screen">
+
+        
+        <!-- Main Content -->
+        <div class="flex-1 p-6">
+            <a href="{%url 'addtransaction'%}" class="bg-green-500 hover:bg-gree-700 text-white font-bold py-2 px-4 rounded float-end m-2">
+                + Add Transaction
+                </a>
+            <h1 class="text-3xl font-semibold mb-6">Transactions</h1>
+            
+            <div class="bg-white p-5 rounded-lg shadow">
+                <h3 class="text-xl font-semibold mb-4">Transaction History</h3>
+                 <!-- Add Transaction Button -->
+                
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="py-2 px-4">Date</th>
+                            <th class="py-2 px-4">Description</th>
+                            <th class="py-2 px-4">Amount</th>
+                            <th class="py-2 px-4">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for transaction in transactions%}
+                        <tr class="border-t">
+                            <td class="py-2 px-4">{{transaction.date}}</td>
+                            <td class="py-2 px-4">{{transaction.description}}</td>
+                            {% if transaction.transaction_type == 'expense' %}
+                            <td class="py-2 px-4 text-red-600"> - {{transaction.amount}} </td>
+                            {%else%}
+                            <td class="py-2 px-4 text-green-600">  {{transaction.amount}} </td>
+                            {%endif%}
+
+                            <td class="py-2 px-4">{{transaction.category.name}}</td>
+                        </tr>
+                       {%endfor%}
+                    </tbody>
+                </table>
+
+            </div>
+            
+        </div>
+        <div>
+            <h1 class="text-3xl font-semibold mb-6">Transactions</h1>
+
+    <!-- Canvas for Chart.js -->
+     <div>
+        <canvas id="transactionChart" width="500" height="500"></canvas>
+     </div>
+    
+        </div>
+
+    <script>
+        const data = [
+            {% for transaction in transactions %}
+                {% if transaction.transaction_type == 'income' %}
+                    {{ transaction.amount }},
+                {% else %}
+                    -{{ transaction.amount }},
+                {% endif %}
+            {% endfor %}
+        ];
+    
+        // Log the data to the console to check if it's correct
+        console.log("Data:", data);
+    
+        // Set up the chart
+        const ctx = document.getElementById('transactionChart').getContext('2d');
+        const transactionChart = new Chart(ctx, {
+            type: 'line',  // You can change it to 'bar' or 'pie' if you want
+            data: {
+                labels: [
+                    {% for transaction in transactions %}
+                        "{{ transaction.date }}",
+                    {% endfor %}
+                ],
+                datasets: [{
+                    label: 'Transaction Amounts',
+                    data: data,
+                    borderColor: '#4CAF50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                    borderWidth: 2,
+                    pointRadius: 5,
+                    pointBackgroundColor: '#4CAF50',
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        type: 'category',
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Amount ($)'
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `Date: ${tooltipItem.label}, Amount: $${tooltipItem.raw}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+    </div>
+    
+</body>
+</html>
+{%endblock%}

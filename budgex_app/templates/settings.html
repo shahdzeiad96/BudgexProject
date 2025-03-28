@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block content %} 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+<div class="flex-1 p-6">
+    <h1 class="text-3xl font-semibold mb-6">Settings</h1>
+
+    <div class="bg-white p-5 rounded-lg shadow">
+        <h3 class="text-xl font-semibold mb-4">User Settings</h3>
+        <form method="POST" action="settings">
+            {% csrf_token %}
+
+            <label class="block mb-2">First name</label>
+            <input type="text" class="w-full p-2 border rounded mb-4" placeholder="Enter First name" value="{{ firstname }}" name="first_name">
+
+            <label class="block mb-2">Last name</label>
+            <input type="text" class="w-full p-2 border rounded mb-4" placeholder="Enter Last name" value="{{ lastname }}" name="last_name">
+
+            <label class="block mb-2">Email</label>
+            <input type="email" class="w-full p-2 border rounded mb-4" value="{{ useremail }}" disabled>
+
+            <label class="block mb-2">Birth-date</label>
+            <input type="date" class="w-full p-2 border rounded mb-4" name="birthdate" value="{{ birthdate|date:'Y-m-d' }}">
+
+            <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
