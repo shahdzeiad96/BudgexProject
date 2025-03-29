@@ -18,14 +18,39 @@
 <body class="bg-gray-100">
 
     <!-- Navbar -->
-    <nav class="bg-white shadow-md px-4 flex justify-between ">
+    <nav class="bg-white shadow-md px-4 flex justify-between items-center">
         <a href="#"><img class="h-24" src="{% static 'images/logo.png' %}" alt="BudgeX Logo"></a>
+        
         <div class="flex items-center gap-4">
+            <!-- Search Bar -->
+            <div class="relative">
+                <input type="text" class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Search...">
+                <svg class="absolute right-2 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="16" y1="16" x2="20" y2="20"></line>
+                </svg>
+            </div>
+    
+            <!-- Notification Icon (Updated) -->
+            <div class="relative">
+                <a href="#" class="text-gray-700">
+                    <!-- New Bell Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8c0 2.21-1.79 4-4 4s-4-1.79-4-4 1.79-4 4-4 4 1.79 4 4zM4 10h2v7h10v-7h2l-5 5-5-5z"></path>
+                    </svg>
+                    <!-- Badge for unread notifications -->
+                    <span class="absolute top-0 right-0 inline-block w-3 h-3 bg-red-500 rounded-full"></span>
+                </a>
+            </div>
+    
+            <!-- User Greeting -->
             <h5 class="text-lg font-semibold text-gray-700">Welcome back, {{ username }}</h5>
+    
+            <!-- Logout Button -->
             <a href="{% url 'logout' %}" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">Logout</a>
         </div>
     </nav>
-
+    
     <div class="flex h-screen">
         <!-- Sidebar -->
         <div class="w-64 bg-green-800 text-white p-6">
